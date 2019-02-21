@@ -107,7 +107,7 @@ function showTodos() {
 function createTodo() {
   const todo = prompt("タスクを入力してください");
   if (todo) {
-    todos.push = todo;
+    todos.push(todo);
     alert("新しいタスクを追加しました。");
     showTodos();
   } else {
@@ -139,10 +139,12 @@ function createTodo() {
 
 function deleteTodo() {
   const deleteString = prompt("削除するタスクの番号を指定してください");
-  const todoNumber = palseInt(deleteString, 10);
-  if (todoNumber < todos.length) {
-    todos.splice(todoNumber, 1);
-    alert(`${todos[todoNumber]}を削除しました`);
+  const todoNumber = parseInt(deleteString, 10);
+  if (todoNumber >= todos.length || isNaN(todonumber) || todonumber < 0) {
+    alert("不正な値のためスキップします");
+  } else {
+    const deletetodos = todos.splice(todoNumber, 1);
+    alert(`${deletetodos[0]}を削除しました`);
     showTodos();
   }
 }
