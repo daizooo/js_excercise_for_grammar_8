@@ -2,11 +2,9 @@ const todos = ["掃除", "買い物", "散歩"];
 
 const commands = ["確認", "追加", "削除", "終了"];
 
-let input;
 
-
-function roop(inputAnswer) {
-  if (!!inputAnswer === true) {
+function loop(inputAnswer) {
+  if (inputAnswer) {
     if (inputAnswer === commands[0]) {
       showTodos();
     } else if (inputAnswer === commands[1]) {
@@ -21,28 +19,25 @@ function roop(inputAnswer) {
     }
   }
   const input = prompt(`「${commands}」のいずれかを入力してください`);
-  roop(input);
+  loop(input);
 }
 
 function showTodos() {
-  if (todos === undefined) {
-    console.log(`========================`);
-    console.log(`現在持っているのタスク一覧`);
-    console.log(`========================`);
-    console.log(`タスクなし`);
-  } else {
-    console.log(`========================`);
-    console.log(`現在持っているのタスク一覧`);
-    console.log(`========================`);
+  console.log(`========================`);
+  console.log(`現在持っているのタスク一覧`);
+  console.log(`========================`);
+  if (todos.length > 0) {
     todos.forEach((number, index) => {
       console.log(`${index}：${number}`);
     });
+  } else {
+    console.log(`タスクなし`);
   }
 }
 
 function createTodos() {
-  let todosInput = prompt("タスクを入力してください");
-  if (todosInput === undefined) {
+  const todosInput = prompt("タスクを入力してください");
+  if (!todosInput) {
     alert("タスクを入力してください");
   } else {
     todos.push(todosInput);
@@ -52,15 +47,15 @@ function createTodos() {
 }
 
 function deleteTodos() {
-  let inputOfDelete = prompt(`削除するタスクの番号を指定してください`);
-  let numberOfDeleteTodo = parseInt(inputOfDelete, 10);
-  if (numberOfDeleteTodo < 0 || isNaN(numberOfDeleteTodo) || numberOfDeleteTodo < todos.lemgth) {
+  const inputOfDelete = prompt(`削除するタスクの番号を指定してください`);
+  const numberOfDeleteTodo = parseInt(inputOfDelete, 10);
+  if (numberOfDeleteTodo < 0 || isNaN(numberOfDeleteTodo) || numberOfDeleteTodo >= todos.length) {
     alert("不正な値のためスキップします");
   } else {
-    let deleteNumber = todos.splice(numberOfDeleteTodo, 1);
+    const deleteNumber = todos.splice(numberOfDeleteTodo, 1);
     alert(`${deleteNumber}を削除しました`);
     showTodos();
   }
 }
 
-roop();
+loop();
